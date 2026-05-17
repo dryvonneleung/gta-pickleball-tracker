@@ -359,6 +359,7 @@ body {
 .court-list {
     flex: 1;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     padding: 8px;
 }
 
@@ -980,6 +981,8 @@ body {
         border-radius: var(--radius-xl) var(--radius-xl) 0 0;
         transform: translateY(100%);
         transition: transform var(--transition-slow);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .sidebar.open { transform: translateY(0); }
