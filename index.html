@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTA Pickleball Court Tracker | Find Indoor & Outdoor Courts</title>
+    <meta name="description" content="Discover pickleball courts across the Greater Toronto Area. Find indoor and outdoor courts in Toronto, Mississauga, Brampton, Markham, Vaughan and more.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- App CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="main-header">
+        <div class="header-inner">
+            <div class="logo-group">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="18" stroke="url(#logoGrad)" stroke-width="3" fill="none"/>
+                        <circle cx="20" cy="20" r="6" fill="url(#logoGrad)"/>
+                        <line x1="20" y1="2" x2="20" y2="14" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="20" y1="26" x2="20" y2="38" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="2" y1="20" x2="14" y2="20" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="26" y1="20" x2="38" y2="20" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
+                                <stop offset="0%" stop-color="#34d399"/>
+                                <stop offset="100%" stop-color="#06b6d4"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>GTA Pickle<span class="accent">Courts</span></h1>
+                    <p class="tagline">Greater Toronto Area Court Finder</p>
+                </div>
+            </div>
+            <div class="header-stats" id="header-stats">
+                <div class="stat-pill">
+                    <span class="stat-number" id="stat-total">0</span>
+                    <span class="stat-label">Courts</span>
+                </div>
+                <div class="stat-pill indoor">
+                    <span class="stat-number" id="stat-indoor">0</span>
+                    <span class="stat-label">Indoor</span>
+                </div>
+                <div class="stat-pill outdoor">
+                    <span class="stat-number" id="stat-outdoor">0</span>
+                    <span class="stat-label">Outdoor</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <!-- Search -->
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    <input type="text" id="search-input" class="search-input" placeholder="Search courts, cities...">
+                    <button class="search-clear hidden" id="search-clear" aria-label="Clear search">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters-section">
+                <div class="filter-group">
+                    <label class="filter-label">Court Type</label>
+                    <div class="filter-chips" id="type-filters">
+                        <button class="chip active" data-filter="all" id="filter-all">All</button>
+                        <button class="chip" data-filter="outdoor" id="filter-outdoor">
+                            <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14">
+                                <circle cx="10" cy="5" r="3"/>
+                                <path d="M2 18 L6 10 L10 14 L14 8 L18 18Z" fill="currentColor" opacity="0.7"/>
+                            </svg>
+                            Outdoor
+                        </button>
+                        <button class="chip" data-filter="indoor" id="filter-indoor">
+                            <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14">
+                                <path d="M2 18V8L10 2L18 8V18H2Z"/>
+                            </svg>
+                            Indoor
+                        </button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Access</label>
+                    <div class="filter-chips" id="access-filters">
+                        <button class="chip small" data-access="free" id="filter-free">🆓 Free</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">City</label>
+                    <div class="filter-chips wrap" id="city-filters">
+                        <button class="chip active" data-city="all" id="filter-city-all">All Cities</button>
+                        <!-- Cities populated by JS -->
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Amenities</label>
+                    <div class="filter-chips wrap" id="amenity-filters">
+                        <button class="chip small" data-amenity="lights" id="filter-lights">🔦 Lights</button>
+                        <button class="chip small" data-amenity="washrooms" id="filter-washrooms">🚻 Washrooms</button>
+                        <button class="chip small" data-amenity="parking" id="filter-parking">🅿️ Parking</button>
+                        <button class="chip small" data-amenity="dropin" id="filter-dropin">🎾 Drop-in</button>
+                        <button class="chip small" data-amenity="coaching" id="filter-coaching">🏋️ Coaching</button>
+                        <button class="chip small" data-amenity="pro_shop" id="filter-proshop">🛒 Pro Shop</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Court List -->
+            <div class="court-list-header">
+                <h2 id="results-count">Loading courts...</h2>
+                <button class="sort-btn" id="sort-btn" aria-label="Sort courts">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M3 12h12M3 18h6"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="court-list" id="court-list">
+                <!-- Court cards populated by JS -->
+            </div>
+        </aside>
+
+        <!-- Map -->
+        <div class="map-container" id="map-container">
+            <div id="map"></div>
+            <!-- Map Controls -->
+            <div class="map-controls">
+                <button class="map-ctrl-btn" id="btn-my-location" aria-label="My location" title="My Location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+                    </svg>
+                </button>
+                <button class="map-ctrl-btn" id="btn-reset-view" aria-label="Reset view" title="Reset View">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12a9 9 0 1 0 9-9M3 3v9h9"/>
+                    </svg>
+                </button>
+            </div>
+            <!-- Legend -->
+            <div class="map-legend">
+                <div class="legend-item">
+                    <span class="legend-dot outdoor"></span> Outdoor
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot indoor"></span> Indoor
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot both"></span> Both
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Toggle -->
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="toggle-icon-list">
+            <line x1="8" y1="6" x2="21" y2="6"/>
+            <line x1="8" y1="12" x2="21" y2="12"/>
+            <line x1="8" y1="18" x2="21" y2="18"/>
+            <circle cx="4" cy="6" r="1.5" fill="currentColor"/>
+            <circle cx="4" cy="12" r="1.5" fill="currentColor"/>
+            <circle cx="4" cy="18" r="1.5" fill="currentColor"/>
+        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="toggle-icon-map" class="hidden">
+            <path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/>
+            <line x1="8" y1="2" x2="8" y2="18"/>
+            <line x1="16" y1="6" x2="16" y2="22"/>
+        </svg>
+    </button>
+
+    <!-- Court Detail Modal -->
+    <div class="modal-overlay hidden" id="modal-overlay">
+        <div class="modal" id="court-modal">
+            <button class="modal-close" id="modal-close" aria-label="Close modal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+            <div class="modal-header" id="modal-header">
+                <div class="modal-badge" id="modal-badge">OUTDOOR</div>
+                <h2 id="modal-title">Court Name</h2>
+                <p class="modal-address" id="modal-address">Address</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info-grid" id="modal-info-grid">
+                    <!-- Populated by JS -->
+                </div>
+                <div class="modal-section">
+                    <h3>Amenities</h3>
+                    <div class="modal-amenities" id="modal-amenities">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                <div class="modal-section" id="modal-notes-section">
+                    <h3>Notes</h3>
+                    <p id="modal-notes"></p>
+                </div>
+                <div class="modal-actions">
+                    <a class="btn btn-primary" id="modal-directions" href="#" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+                        </svg>
+                        Get Directions
+                    </a>
+                    <button class="btn btn-secondary" id="modal-share">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                        </svg>
+                        Share
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast hidden" id="toast">
+        <span id="toast-msg"></span>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- App JS -->
+    <script src="courts-data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
