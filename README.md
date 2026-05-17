@@ -19,7 +19,7 @@ Toronto · Mississauga · Brampton · Markham · Vaughan · Richmond Hill · Oak
 
 ## 🚀 Live Demo
 
-Visit the app at: **[your-username.github.io/gta-pickleball-tracker](https://your-username.github.io/gta-pickleball-tracker)**
+Visit the app at: **[dryvonneleung.github.io/gta-pickleball-tracker](https://dryvonneleung.github.io/gta-pickleball-tracker)**
 
 ## 🛠️ Tech Stack
 
