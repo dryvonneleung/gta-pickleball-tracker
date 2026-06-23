@@ -55,6 +55,7 @@
         sidebar: $('#sidebar'),
         toggleIconList: $('#toggle-icon-list'),
         toggleIconMap: $('#toggle-icon-map'),
+        btnUpdate: $('#btn-update'),
         btnMyLocation: $('#btn-my-location'),
         btnResetView: $('#btn-reset-view'),
         toast: $('#toast'),
@@ -530,6 +531,30 @@
                 showToast('Geolocation not supported');
             }
         });
+
+        // Update button — runs server-side scraper and refreshes data
+        if (dom.btnUpdate) {
+            dom.btnUpdate.addEventListener('click', async () => {
+                dom.btnUpdate.disabled = true;
+                showToast('Updating courts — this may take a moment...');
+                try {
+                    const resp = await fetch('/update', { method: 'POST' });
+                    const body = await resp.json().catch(() => ({}));
+                    if (resp.ok && body.ok) {
+                        showToast('Update complete — reloading');
+                        setTimeout(() => location.reload(), 800);
+                    } else {
+                        const msg = body.error || body.output || 'Update failed';
+                        showToast(msg);
+                        dom.btnUpdate.disabled = false;
+                    }
+                } catch (e) {
+                    console.error('Update error', e);
+                    showToast('Update request failed');
+                    dom.btnUpdate.disabled = false;
+                }
+            });
+        }
 
         // Resize handler
         window.addEventListener('resize', () => {

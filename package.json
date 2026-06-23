@@ -1,0 +1,12 @@
+{
+  "name": "gta-pickleball-tracker",
+  "version": "0.1.0",
+  "description": "GTA Pickleball court tracker with update endpoint",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

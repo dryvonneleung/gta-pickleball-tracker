@@ -34,12 +34,12 @@ Visit the app at: **[dryvonneleung.github.io/gta-pickleball-tracker](https://dry
 - **Richmond Hill**: [richmondhill.ca](https://www.richmondhill.ca)
 - **Other cities**: Municipal websites, Pickleheads, and community resources
 
-## 🔄 Updating Toronto Court Data
+## 🔄 Updating Court Data
 
-Run the update script to fetch the latest court data from the City of Toronto API:
+Run the auto-update script to fetch and parse the latest court listings across various GTA municipalities (which uses an LLM to parse pages):
 
 ```bash
-python3 update_toronto.py
+python3 auto_update.py
 ```
 
 ## 📄 License
