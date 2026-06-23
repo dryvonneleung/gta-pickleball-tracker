@@ -9,3 +9,12 @@ Thumbs.db
 # Python
 __pycache__/
 *.pyc
+
+# Secrets
+.env
+
+# Python venv
+.venv/
+
+# Auto-updater log
+auto_update.log
