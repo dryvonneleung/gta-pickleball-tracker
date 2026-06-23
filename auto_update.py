@@ -98,6 +98,86 @@ SOURCES = [
         "url":     "https://www.brampton.ca/EN/residents/Recreation/Pages/Pickleball.aspx",
         "enabled": True,
     },
+    {
+        "city":    "Toronto",
+        "url":     "https://www.toronto.ca/data/parks/prd/facilities/pickleball/index.html",
+        "enabled": True,
+    },
+    {
+        "city":    "Vaughan",
+        "url":     "https://www.vaughan.ca/pickleball",
+        "enabled": True,
+    },
+    {
+        "city":    "Oakville",
+        "url":     "https://www.oakville.ca/parks-recreation-culture/parks-trails-gardens/tennis-and-pickleball-courts/",
+        "enabled": True,
+    },
+    {
+        "city":    "Pickering",
+        "url":     "https://www.pickering.ca/en/discovering/pickleball.aspx",
+        "enabled": True,
+    },
+    {
+        "city":    "Whitby",
+        "url":     "https://www.whitby.ca/en/play/tennis-and-pickleball-courts.aspx",
+        "enabled": True,
+    },
+    {
+        "city":    "Oshawa",
+        "url":     "https://www.oshawa.ca/en/parks-recreation-and-culture/racquet-sports.aspx",
+        "enabled": True,
+    },
+    {
+        "city":    "Caledon",
+        "url":     "https://www.caledon.ca/en/living-here/tennis-and-pickleball.aspx",
+        "enabled": True,
+    },
+    {
+        "city":    "Halton Hills",
+        "url":     "https://www.haltonhills.ca/courts",
+        "enabled": True,
+    },
+    {
+        "city":    "King",
+        "url":     "https://www.king.ca/recreation",
+        "enabled": True,
+    },
+    {
+        "city":    "Whitchurch-Stouffville",
+        "url":     "https://www.townofws.ca/play/parks-and-open-spaces/",
+        "enabled": True,
+    },
+    {
+        "city":    "East Gwillimbury",
+        "url":     "https://www.eastgwillimbury.ca/en/parks-and-recreation/sports-fields-and-courts.aspx",
+        "enabled": True,
+    },
+    {
+        "city":    "Georgina",
+        "url":     "https://www.georgina.ca/en/recreation-and-culture/recreation-programs.aspx",
+        "enabled": True,
+    },
+    {
+        "city":    "Brock",
+        "url":     "https://townshipofbrock.ca/",
+        "enabled": True,
+    },
+    {
+        "city":    "Uxbridge",
+        "url":     "https://www.uxbridge.ca/en/parks-and-recreation/parks-and-trails.aspx",
+        "enabled": True,
+    },
+    {
+        "city":    "Scugog",
+        "url":     "https://www.scugog.ca/en/live-and-play/parks-and-trails.aspx",
+        "enabled": True,
+    },
+    {
+        "city":    "Clarington",
+        "url":     "https://www.clarington.net/en/recreation-and-tourism/parks-and-sports-fields.aspx",
+        "enabled": True,
+    },
 ]
 
 # -- Logging --
