@@ -24,18 +24,26 @@
             <div class="logo-group">
                 <div class="logo-icon">
                     <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="20" cy="20" r="18" stroke="url(#logoGrad)" stroke-width="3" fill="none"/>
-                        <circle cx="20" cy="20" r="6" fill="url(#logoGrad)"/>
-                        <line x1="20" y1="2" x2="20" y2="14" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
-                        <line x1="20" y1="26" x2="20" y2="38" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
-                        <line x1="2" y1="20" x2="14" y2="20" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
-                        <line x1="26" y1="20" x2="38" y2="20" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
                         <defs>
                             <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
                                 <stop offset="0%" stop-color="#ff8a00"/>
                                 <stop offset="100%" stop-color="#ff1d8e"/>
                             </linearGradient>
+                            <!-- 9 holes punched out of the ball (3x3) -->
+                            <mask id="ballHoles">
+                                <rect width="40" height="40" fill="white"/>
+                                <circle cx="12" cy="12" r="2.1" fill="black"/>
+                                <circle cx="20" cy="12" r="2.1" fill="black"/>
+                                <circle cx="28" cy="12" r="2.1" fill="black"/>
+                                <circle cx="12" cy="20" r="2.1" fill="black"/>
+                                <circle cx="20" cy="20" r="2.1" fill="black"/>
+                                <circle cx="28" cy="20" r="2.1" fill="black"/>
+                                <circle cx="12" cy="28" r="2.1" fill="black"/>
+                                <circle cx="20" cy="28" r="2.1" fill="black"/>
+                                <circle cx="28" cy="28" r="2.1" fill="black"/>
+                            </mask>
                         </defs>
+                        <circle cx="20" cy="20" r="18" fill="url(#logoGrad)" mask="url(#ballHoles)"/>
                     </svg>
                 </div>
                 <div class="logo-text">
