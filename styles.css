@@ -23,6 +23,11 @@
     --clr-cyan-dim: rgba(255, 29, 142, 0.14);
     --clr-amber: #c4e000;
     --clr-amber-dim: rgba(182, 224, 0, 0.22);
+    /* Greenish-yellow (the classic pickleball color) — used widely as a fill/accent.
+       lime-ink is a darkened tone that stays readable as text on light backgrounds. */
+    --clr-lime: #c4e000;
+    --clr-lime-dim: rgba(182, 224, 0, 0.22);
+    --clr-lime-ink: #56680a;
     --clr-purple: #ff1d8e;
     --clr-purple-dim: rgba(255, 29, 142, 0.14);
     --clr-rose: #ff1d8e;
@@ -31,6 +36,7 @@
     --gradient-indoor: linear-gradient(135deg, #ff1d8e, #ff6a00);
     --gradient-outdoor: linear-gradient(135deg, #ff8a00, #c4e000);
     --gradient-both: linear-gradient(135deg, #c4e000, #ff1d8e);
+    --gradient-tri: linear-gradient(120deg, #ff8a00, #c4e000 52%, #ff1d8e);
 
     /* Typography */
     --font-display: 'Space Grotesk', sans-serif;
@@ -148,7 +154,7 @@ body {
 }
 
 .logo-text .accent {
-    background: var(--gradient-primary);
+    background: var(--gradient-tri);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -902,6 +908,13 @@ body {
     color: var(--clr-text-secondary);
 }
 .btn-secondary:hover { background: var(--clr-surface-3); color: var(--clr-text); }
+
+.btn-lime {
+    background: var(--clr-lime);
+    color: #241405;
+    font-weight: 700;
+}
+.btn-lime:hover { box-shadow: 0 0 18px rgba(182, 224, 0, 0.55); transform: translateY(-1px); }
 
 /* ============================================
    TOAST
