@@ -124,9 +124,17 @@ they're discovered separately in two stages:
    ```
 
    Set up a key: Google Cloud → enable **Places API (New)** → create an API key.
-   Text Search is billed per request (the script logs the request count before
-   starting; Google's recurring free credit covers light use). Results tagged
-   `_low_confidence` are likely not pickleball venues — check them before adding.
+   Results tagged `_low_confidence` are likely not pickleball venues — check them
+   before adding.
+
+   **Cost:** since March 2025 there's no universal $200 credit; instead each SKU
+   has a free monthly allowance. This script's Text Search requests `website`,
+   `hours`, and `phone`, which puts it in the **Enterprise tier (~1,000 free
+   requests/month**, then ~$25–40/1,000). A full GTA run is ~100 requests
+   (~54 with `--max-pages 1`), so you can run it roughly **10× per month for
+   free**. Discovery is meant to be occasional, so it's effectively free — but
+   set a **budget alert / quota cap** in Google Cloud to be safe. See
+   [Places API usage & billing](https://developers.google.com/maps/documentation/places/web-service/usage-and-billing).
 
    **No local setup?** Run discovery from the Actions tab instead:
    **Actions → "Discover private courts" → Run workflow** (pick a source). It runs

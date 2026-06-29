@@ -208,8 +208,13 @@ def main():
     bbox = tuple(float(x) for x in args.bbox.split(",")) if args.bbox else DEFAULT_BBOX
     centers = build_grid(bbox, args.step)
     max_pages = max(1, min(3, args.max_pages))
+    est = len(centers) * max_pages
     print(f"GTA grid: {len(centers)} tiles × up to {max_pages} page(s) "
-          f"→ up to {len(centers) * max_pages} Places requests.")
+          f"→ up to {est} Places requests.")
+    print("Cost: Text Search with these fields is the Enterprise tier — ~1,000 free "
+          "requests/month, then ~$25-40/1,000. This run uses up to "
+          f"{est}, so you can run it ~{max(1, 1000 // max(est, 1))}× per month free. "
+          "Tip: set a budget/quota cap in Google Cloud; use --max-pages 1 to halve cost.")
 
     seen_ids, raw = set(), []
     for i, c in enumerate(centers, 1):
