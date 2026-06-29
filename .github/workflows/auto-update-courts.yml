@@ -1,0 +1,70 @@
+name: Auto-update courts
+
+# Runs the LLM-powered scraper (auto_update.py) on a schedule to refresh
+# court data from each municipality's official pages, then commits any
+# changes to courts-data.js (which redeploys GitHub Pages).
+#
+# Setup (one time):
+#   Repo → Settings → Secrets and variables → Actions
+#     - Secret  NVIDIA_API_KEY   (required)  your NVIDIA NIM API key
+#     - Variable NVIDIA_BASE_URL (optional)  default: https://integrate.api.nvidia.com/v1
+#     - Variable NVIDIA_MODEL    (optional)  default: meta/llama-3.3-70b-instruct
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'   # every Monday at 08:00 UTC
+  workflow_dispatch:       # allow manual runs from the Actions tab
+    inputs:
+      city:
+        description: "Only update this city (optional, leave blank for all)"
+        required: false
+        default: ''
+
+permissions:
+  contents: write           # allow the job to push courts-data.js
+
+concurrency:
+  group: auto-update-courts
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install --quiet openai python-dotenv
+
+      - name: Configure git identity
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Verify API key is configured
+        env:
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+        run: |
+          if [ -z "$NVIDIA_API_KEY" ]; then
+            echo "::error::NVIDIA_API_KEY secret is not set. Add it under Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+
+      - name: Run auto-updater
+        env:
+          NVIDIA_API_KEY:  ${{ secrets.NVIDIA_API_KEY }}
+          NVIDIA_BASE_URL: ${{ vars.NVIDIA_BASE_URL || 'https://integrate.api.nvidia.com/v1' }}
+          NVIDIA_MODEL:    ${{ vars.NVIDIA_MODEL || 'meta/llama-3.3-70b-instruct' }}
+          CITY_INPUT:      ${{ github.event.inputs.city }}
+        run: |
+          if [ -n "$CITY_INPUT" ]; then
+            python3 auto_update.py --city "$CITY_INPUT"
+          else
+            python3 auto_update.py
+          fi
