@@ -388,7 +388,7 @@ function renderMap(rows) {
 
   rows.forEach(c => {
     const marker = L.circleMarker([c.lat, c.lng], {
-      radius: 7, color: '#ff1d8e', fillColor: '#ff8a00', fillOpacity: 0.9, weight: 2,
+      radius: 7, color: '#ff1d8e', fillColor: '#c4e000', fillOpacity: 0.95, weight: 2,
     });
     marker.bindPopup(
       `<strong>${escapeHtml(c.name)}</strong><br>${escapeHtml(c.city)} · up to ${c.travel_distance_km} km`
@@ -397,7 +397,7 @@ function renderMap(rows) {
     // coverage radius
     L.circle([c.lat, c.lng], {
       radius: c.travel_distance_km * 1000,
-      color: '#ff8a00', weight: 1, fillColor: '#ff8a00', fillOpacity: 0.07,
+      color: '#a9c400', weight: 1, fillColor: '#c4e000', fillOpacity: 0.10,
     }).addTo(state.layer);
   });
 
