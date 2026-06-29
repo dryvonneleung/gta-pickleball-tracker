@@ -517,7 +517,7 @@
                         state.map.flyTo([pos.coords.latitude, pos.coords.longitude], 13, { duration: 0.8 });
                         L.circleMarker([pos.coords.latitude, pos.coords.longitude], {
                             radius: 8,
-                            fillColor: '#3b82f6',
+                            fillColor: '#ff1d8e',
                             fillOpacity: 1,
                             color: '#fff',
                             weight: 3
