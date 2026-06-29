@@ -189,6 +189,14 @@ function initForm() {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const fd = new FormData(form);
+
+    // The form is novalidate, so validate the required fields here.
+    const name = (fd.get('name') || '').trim();
+    if (!name) { toast('Please enter your name.'); return; }
+
+    const email = (fd.get('email') || '').trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { toast('Please enter a valid email address.'); return; }
+
     const cityName = fd.get('city');
     const city = cityByName[cityName];
     if (!city) { toast('Please pick a home-base city.'); return; }
@@ -197,8 +205,8 @@ function initForm() {
     if (skills.length === 0) { toast('Pick at least one skill level you teach.'); return; }
 
     const coach = {
-      name: fd.get('name').trim(),
-      email: fd.get('email').trim(),
+      name,
+      email,
       phone: (fd.get('phone') || '').trim() || null,
       city: cityName,
       lat: city.lat,
@@ -342,8 +350,8 @@ function coachCard(c) {
     ${meta.length ? `<p class="coach-meta">${meta.join(' · ')}</p>` : ''}
     ${c.bio ? `<p class="coach-bio">${escapeHtml(c.bio)}</p>` : ''}
     <div class="coach-actions">
-      <a class="btn btn-primary" href="mailto:${encodeURIComponent(c.email)}?subject=Pickleball%20coaching%20enquiry">Contact</a>
-      ${c.phone ? `<a class="btn btn-secondary" href="tel:${encodeURIComponent(c.phone)}">Call</a>` : ''}
+      <a class="btn btn-primary" href="mailto:${escapeHtml(c.email)}?subject=Pickleball%20coaching%20enquiry">Contact</a>
+      ${c.phone ? `<a class="btn btn-secondary" href="tel:${escapeHtml(c.phone.replace(/[^\d+]/g, ''))}">Call</a>` : ''}
     </div>
   </article>`;
 }
