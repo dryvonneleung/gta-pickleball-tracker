@@ -96,6 +96,30 @@ To run it immediately, go to **Actions → Auto-update courts → Run workflow**
 (optionally enter a single city). Adjust the `cron:` line in the workflow to
 change the schedule.
 
+### Discovering private / commercial venues
+
+Private clubs (e.g. King Square Sports Centre) aren't in municipal open data, so
+they're discovered separately in two stages:
+
+1. **Discover** with `discover_courts_osm.py` — queries OpenStreetMap (free, no
+   API key) for pickleball venues across the GTA and writes new candidates to
+   `private-courts-candidates.json` (it de-dupes against `courts-data.js` and
+   does **not** modify it):
+
+   ```bash
+   python3 discover_courts_osm.py
+   ```
+
+   Data © OpenStreetMap contributors (ODbL) — attribute OSM if you publish it.
+
+2. **Review & enrich** — sanity-check each candidate's address/coordinates,
+   optionally run `auto_update.py` against the venue's website to fill in court
+   count/hours, then paste vetted entries into `courts-data.js`.
+
+Court entries may include an optional `website` field (booking/info link), shown
+as a **Book / Visit site** button in the court detail modal. The court list can
+be filtered by **Free** or **Private/Paid** access.
+
 ## 📄 License
 
 MIT
