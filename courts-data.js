@@ -201,22 +201,6 @@ const COURTS_DATA = [
         amenities: ["parking", "washrooms"],
         notes: "5 free outdoor courts in Etobicoke. Spacious park with ample parking."
     },
-    {
-        id: 55,
-        name: "Banbury Park",
-        city: "Toronto",
-        address: "35 Banbury Rd, North York, ON",
-        lat: 43.7440,
-        lng: -79.3665,
-        type: "outdoor",
-        numCourts: 2,
-        surface: "Asphalt",
-        access: "Public — Free",
-        hours: "Dawn to Dusk",
-        amenities: ["lights", "parking"],
-        notes: "Lit courts in Don Mills area. Good for evening play."
-    },
-
     // ======== TORONTO — INDOOR / BOTH ========
     {
         id: 10,
