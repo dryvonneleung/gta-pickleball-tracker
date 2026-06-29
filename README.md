@@ -128,6 +128,13 @@ they're discovered separately in two stages:
    starting; Google's recurring free credit covers light use). Results tagged
    `_low_confidence` are likely not pickleball venues — check them before adding.
 
+   **No local setup?** Run discovery from the Actions tab instead:
+   **Actions → "Discover private courts" → Run workflow** (pick a source). It runs
+   the script(s) and opens a **pull request** with the updated
+   `private-courts-candidates.json` for review. Requires the `GOOGLE_PLACES_API_KEY`
+   secret and the repo setting *Allow GitHub Actions to create and approve pull
+   requests* (Settings → Actions → General).
+
 2. **Review & enrich** — sanity-check each candidate's address/coordinates,
    optionally run `auto_update.py` against the venue's website to fill in court
    count/hours, then paste vetted entries into `courts-data.js`.
