@@ -15,6 +15,7 @@
    "Demo mode" and stores signups only in this browser (localStorage).
    ============================================================ */
 window.SUPABASE_CONFIG = {
-  url: '',      // e.g. 'https://abcdefgh.supabase.co'
-  anonKey: ''   // e.g. 'eyJhbGciOi...'
+  url: 'https://mkwoegdiealzyevfuods.supabase.co',
+  // Supabase "publishable" key (public, client-safe — access is gated by RLS).
+  anonKey: 'sb_publishable_eUx3YU3PmpripWNMAnXVeQ_8EY5_hBu'
 };
