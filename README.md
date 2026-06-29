@@ -66,11 +66,35 @@ moderation/CAPTCHA before production.
 
 ## 🔄 Updating Court Data
 
-Run the auto-update script to fetch and parse the latest court listings across various GTA municipalities (which uses an LLM to parse pages):
+`auto_update.py` fetches each municipality's official pickleball page and uses an
+LLM to extract new/changed courts, then writes them to `courts-data.js`.
+
+### Run it manually
 
 ```bash
-python3 auto_update.py
+export NVIDIA_API_KEY=your_key_here
+python3 auto_update.py            # all cities
+python3 auto_update.py --city Aurora   # one city
+python3 auto_update.py --dry-run       # preview only
 ```
+
+### Automatic scheduled updates (GitHub Action)
+
+The workflow [`.github/workflows/auto-update-courts.yml`](.github/workflows/auto-update-courts.yml)
+runs the scraper every **Monday at 08:00 UTC** (and on demand from the Actions
+tab) and commits any changes, which redeploys the site.
+
+**One-time setup** — in **Settings → Secrets and variables → Actions**:
+
+| Type | Name | Required | Default |
+|------|------|----------|---------|
+| Secret | `NVIDIA_API_KEY` | ✅ yes | — |
+| Variable | `NVIDIA_BASE_URL` | optional | `https://integrate.api.nvidia.com/v1` |
+| Variable | `NVIDIA_MODEL` | optional | `meta/llama-3.3-70b-instruct` |
+
+To run it immediately, go to **Actions → Auto-update courts → Run workflow**
+(optionally enter a single city). Adjust the `cron:` line in the workflow to
+change the schedule.
 
 ## 📄 License
 
