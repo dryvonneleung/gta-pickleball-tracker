@@ -119,6 +119,7 @@
                     <label class="filter-label">Access</label>
                     <div class="filter-chips" id="access-filters">
                         <button class="chip small" data-access="free" id="filter-free">🆓 Free</button>
+                        <button class="chip small" data-access="private" id="filter-private">💳 Private/Paid</button>
                     </div>
                 </div>
 
@@ -249,6 +250,14 @@
                         </svg>
                         Share
                     </button>
+                    <a class="btn btn-secondary hidden" id="modal-website" href="#" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                        Book / Visit site
+                    </a>
                 </div>
             </div>
         </div>
@@ -262,7 +271,7 @@
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <!-- App JS -->
-    <script src="courts-data.js?v=8"></script>
-    <script src="app.js?v=6"></script>
+    <script src="courts-data.js?v=9"></script>
+    <script src="app.js?v=7"></script>
 </body>
 </html>

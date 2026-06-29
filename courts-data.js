@@ -3026,5 +3026,21 @@ const COURTS_DATA = [
         amenities: ["washrooms"],
         notes: "City of Toronto public park. No nets provided (bring your own). Book online at toronto.ca or call 416-396-7378."
     },
+    {
+        id: 9001,
+        name: "King Square Sports Centre",
+        city: "Markham",
+        address: "9390 Woodbine Ave, Markham, ON",
+        lat: 43.8780,
+        lng: -79.3525,
+        type: "indoor",
+        numCourts: 9,
+        surface: "Wood",
+        access: "Private — Drop-in",
+        hours: "Limited weekday drop-in (approx. 9:00 AM – 12:00 PM) — see website",
+        amenities: ["washrooms", "parking", "dropin"],
+        website: "https://kingsquaresportscentre.com/pickleball-markham/",
+        notes: "Private indoor sports centre with 9 wood courts on the 2nd floor of King Square mall. Permanent lines, portable nets provided. Coordinates approximate — verify."
+    }
 
 ];

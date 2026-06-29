@@ -12,7 +12,7 @@
         activeTypeFilter: 'all',
         activeCityFilter: 'all',
         activeAmenityFilters: new Set(),
-        freeOnly: false,
+        accessFilter: null,   // null | 'free' | 'private'
         searchQuery: '',
         sortOrder: 'name', // 'name' | 'courts' | 'city'
         selectedCourtId: null,
@@ -51,6 +51,7 @@
         modalNotesSection: $('#modal-notes-section'),
         modalDirections: $('#modal-directions'),
         modalShare: $('#modal-share'),
+        modalWebsite: $('#modal-website'),
         mobileToggle: $('#mobile-toggle'),
         sidebar: $('#sidebar'),
         toggleIconList: $('#toggle-icon-list'),
@@ -172,9 +173,11 @@
             );
         }
 
-        // Free filter
-        if (state.freeOnly) {
+        // Access filter (free / private)
+        if (state.accessFilter === 'free') {
             filtered = filtered.filter(c => c.access && c.access.toLowerCase().includes('free'));
+        } else if (state.accessFilter === 'private') {
+            filtered = filtered.filter(c => c.access && !c.access.toLowerCase().includes('free'));
         }
 
         // Search
@@ -375,6 +378,13 @@
 
         dom.modalDirections.href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(court.address)}`;
 
+        if (court.website) {
+            dom.modalWebsite.href = court.website;
+            dom.modalWebsite.classList.remove('hidden');
+        } else {
+            dom.modalWebsite.classList.add('hidden');
+        }
+
         dom.modalShare.onclick = () => {
             const text = `Check out ${court.name} — ${court.numCourts} pickleball courts at ${court.address}!`;
             if (navigator.share) {
@@ -451,12 +461,14 @@
             applyFilters();
         });
 
-        // Access (Free) filter
+        // Access filter (Free / Private — mutually exclusive)
         dom.accessFilters.addEventListener('click', (e) => {
             const btn = e.target.closest('.chip');
             if (!btn) return;
-            btn.classList.toggle('active');
-            state.freeOnly = btn.classList.contains('active');
+            const wasActive = btn.classList.contains('active');
+            dom.accessFilters.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+            if (!wasActive) btn.classList.add('active');
+            state.accessFilter = btn.classList.contains('active') ? btn.dataset.access : null;
             applyFilters();
         });
 
