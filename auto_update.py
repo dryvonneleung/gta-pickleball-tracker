@@ -99,9 +99,12 @@ SOURCES = [
         "enabled": True,
     },
     {
+        # Disabled: Toronto courts are sourced from the City of Toronto open-data
+        # feed (higher quality than this HTML page). Leaving this off prevents the
+        # scraper from overwriting the clean open-data entries in courts-data.js.
         "city":    "Toronto",
         "url":     "https://www.toronto.ca/data/parks/prd/facilities/pickleball/index.html",
-        "enabled": True,
+        "enabled": False,
     },
     {
         "city":    "Vaughan",
