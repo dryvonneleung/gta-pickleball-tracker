@@ -112,6 +112,22 @@ they're discovered separately in two stages:
 
    Data © OpenStreetMap contributors (ODbL) — attribute OSM if you publish it.
 
+   For broader coverage of commercial clubs, also run the **Google Places**
+   discovery (`discover_courts_places.py`), which tiles the GTA and runs a
+   "pickleball" search in each cell, then **merges** new finds into the same
+   `private-courts-candidates.json`:
+
+   ```bash
+   export GOOGLE_PLACES_API_KEY=your_key_here   # Places API (New) must be enabled
+   python3 discover_courts_places.py            # full GTA grid (~54 tiles)
+   python3 discover_courts_places.py --max-pages 1   # cheaper, ≤20 results/tile
+   ```
+
+   Set up a key: Google Cloud → enable **Places API (New)** → create an API key.
+   Text Search is billed per request (the script logs the request count before
+   starting; Google's recurring free credit covers light use). Results tagged
+   `_low_confidence` are likely not pickleball venues — check them before adding.
+
 2. **Review & enrich** — sanity-check each candidate's address/coordinates,
    optionally run `auto_update.py` against the venue's website to fill in court
    count/hours, then paste vetted entries into `courts-data.js`.
