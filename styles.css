@@ -34,8 +34,8 @@
 
     --gradient-primary: linear-gradient(135deg, #ff8a00, #ff1d8e);
     --gradient-indoor: linear-gradient(135deg, #ff1d8e, #ff6a00);
-    --gradient-outdoor: linear-gradient(135deg, #ff8a00, #c4e000);
-    --gradient-both: linear-gradient(135deg, #c4e000, #ff1d8e);
+    --gradient-outdoor: linear-gradient(135deg, #d4ee00, #b5d200);
+    --gradient-both: linear-gradient(135deg, #ff8a00, #f96900);
 
     /* Typography */
     --font-display: 'Space Grotesk', sans-serif;
@@ -191,7 +191,7 @@ body {
 }
 
 .stat-pill.indoor .stat-number { color: var(--clr-purple); }
-.stat-pill.outdoor .stat-number { color: var(--clr-green); }
+.stat-pill.outdoor .stat-number { color: var(--clr-lime-ink); }
 .stat-label { color: var(--clr-text-muted); font-weight: 500; }
 
 /* ============================================
@@ -445,16 +445,16 @@ body {
 }
 
 .court-type-badge.outdoor {
-    background: var(--clr-green-dim);
-    color: var(--clr-green);
+    background: var(--clr-amber-dim);
+    color: var(--clr-lime-ink);
 }
 .court-type-badge.indoor {
     background: var(--clr-purple-dim);
     color: var(--clr-purple);
 }
 .court-type-badge.both {
-    background: var(--clr-amber-dim);
-    color: var(--clr-amber);
+    background: var(--clr-green-dim);
+    color: var(--clr-green);
 }
 
 .court-card-address {
@@ -590,9 +590,9 @@ body {
     height: 10px;
     border-radius: 50%;
 }
-.legend-dot.outdoor { background: var(--clr-green); box-shadow: 0 0 6px var(--clr-green); }
+.legend-dot.outdoor { background: var(--clr-amber); box-shadow: 0 0 6px var(--clr-amber); }
 .legend-dot.indoor { background: var(--clr-purple); box-shadow: 0 0 6px var(--clr-purple); }
-.legend-dot.both { background: var(--clr-amber); box-shadow: 0 0 6px var(--clr-amber); }
+.legend-dot.both { background: var(--clr-green); box-shadow: 0 0 6px var(--clr-green); }
 
 /* Custom Map Markers */
 .custom-marker {
@@ -611,9 +611,9 @@ body {
     position: relative;
 }
 
-.marker-dot.outdoor { background: var(--clr-green); }
+.marker-dot.outdoor { background: var(--clr-amber); }
 .marker-dot.indoor { background: var(--clr-purple); }
-.marker-dot.both { background: var(--clr-amber); }
+.marker-dot.both { background: var(--clr-green); }
 
 .marker-dot::after {
     content: '';
@@ -627,9 +627,9 @@ body {
     animation: marker-pulse 2s infinite;
 }
 
-.marker-dot.outdoor::after { background: rgba(249, 105, 0, 0.3); }
+.marker-dot.outdoor::after { background: rgba(182, 224, 0, 0.35); }
 .marker-dot.indoor::after { background: rgba(255, 29, 142, 0.3); }
-.marker-dot.both::after { background: rgba(182, 224, 0, 0.35); }
+.marker-dot.both::after { background: rgba(249, 105, 0, 0.3); }
 
 @keyframes marker-pulse {
     0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
@@ -684,9 +684,9 @@ body {
     border-radius: var(--radius-full);
     margin-bottom: 6px;
 }
-.popup-badge.outdoor { background: var(--clr-green-dim); color: var(--clr-green); }
+.popup-badge.outdoor { background: var(--clr-amber-dim); color: var(--clr-lime-ink); }
 .popup-badge.indoor { background: var(--clr-purple-dim); color: var(--clr-purple); }
-.popup-badge.both { background: var(--clr-amber-dim); color: #5a6b00; }
+.popup-badge.both { background: var(--clr-green-dim); color: var(--clr-green); }
 
 .popup-courts {
     font-size: 0.75rem;
@@ -780,9 +780,9 @@ body {
     margin-bottom: 10px;
 }
 
-.modal-badge.outdoor { background: var(--clr-green-dim); color: var(--clr-green); }
+.modal-badge.outdoor { background: var(--clr-amber-dim); color: var(--clr-lime-ink); }
 .modal-badge.indoor { background: var(--clr-purple-dim); color: var(--clr-purple); }
-.modal-badge.both { background: var(--clr-amber-dim); color: var(--clr-amber); }
+.modal-badge.both { background: var(--clr-green-dim); color: var(--clr-green); }
 
 .modal-header h2 {
     font-family: var(--font-display);
