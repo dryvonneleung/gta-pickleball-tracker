@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find a Coach | GTA Pickleball Coach Directory</title>
+    <meta name="description" content="Find a pickleball coach in the Greater Toronto Area, or sign up to teach. Coaches list how far they'll travel to reach students.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="coaches.css">
+</head>
+<body class="page-coaches">
+    <!-- Header -->
+    <header class="header" id="main-header">
+        <div class="header-inner">
+            <a class="logo-group" href="index.html" style="text-decoration:none;">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="18" stroke="url(#logoGrad)" stroke-width="3" fill="none"/>
+                        <circle cx="20" cy="20" r="6" fill="url(#logoGrad)"/>
+                        <line x1="20" y1="2" x2="20" y2="14" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="20" y1="26" x2="20" y2="38" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="2" y1="20" x2="14" y2="20" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="26" y1="20" x2="38" y2="20" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
+                                <stop offset="0%" stop-color="#34d399"/>
+                                <stop offset="100%" stop-color="#06b6d4"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>GTA Pickle<span class="accent">Courts</span></h1>
+                    <p class="tagline">Coach Directory</p>
+                </div>
+            </a>
+            <div class="header-actions">
+                <a class="btn btn-secondary" href="index.html">← Court Finder</a>
+                <a class="btn btn-primary" href="#signup">Become a coach</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page content -->
+    <main class="coach-page">
+        <!-- Hero -->
+        <section class="coach-hero">
+            <h1>Find a Pickleball Coach in the GTA</h1>
+            <p>Browse coaches across the Greater Toronto Area — each lists how far they'll
+               travel to teach. Or sign up to offer lessons and reach new students.</p>
+            <div id="mode-banner" class="mode-banner hidden"></div>
+        </section>
+
+        <!-- ============ SIGNUP ============ -->
+        <section class="coach-section" id="signup">
+            <div class="section-head">
+                <h2>Coach signup</h2>
+                <p class="muted">Tell students who you are and how far you'll travel.</p>
+            </div>
+
+            <form id="coach-form" class="coach-form" novalidate>
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="f-name">Name <span class="req">*</span></label>
+                        <input id="f-name" name="name" type="text" required placeholder="Jane Smith">
+                    </div>
+                    <div class="field">
+                        <label for="f-email">Email <span class="req">*</span></label>
+                        <input id="f-email" name="email" type="email" required placeholder="jane@example.com">
+                    </div>
+                    <div class="field">
+                        <label for="f-phone">Phone</label>
+                        <input id="f-phone" name="phone" type="tel" placeholder="(optional)">
+                    </div>
+                    <div class="field">
+                        <label for="f-city">Home-base city <span class="req">*</span></label>
+                        <select id="f-city" name="city" required>
+                            <option value="">Choose a city…</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="f-experience">Years of experience</label>
+                        <input id="f-experience" name="experience" type="number" min="0" max="60" placeholder="(optional)">
+                    </div>
+                    <div class="field">
+                        <label for="f-rate">Hourly rate (CAD)</label>
+                        <input id="f-rate" name="rate" type="number" min="0" step="1" placeholder="(optional)">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="f-travel">How far will you travel to teach? <span class="req">*</span>
+                        <span class="travel-val" id="f-travel-val">25 km</span>
+                    </label>
+                    <input id="f-travel" name="travel" type="range" min="0" max="100" step="5" value="25">
+                    <div class="range-scale"><span>0 km</span><span>50 km</span><span>100 km</span></div>
+                </div>
+
+                <div class="field">
+                    <label>Skill levels you teach <span class="req">*</span></label>
+                    <div class="check-pills" id="f-skills"></div>
+                </div>
+
+                <div class="field">
+                    <label for="f-certifications">Certifications</label>
+                    <input id="f-certifications" name="certifications" type="text" placeholder="e.g. PPR, IPTPA (optional)">
+                </div>
+
+                <div class="field">
+                    <label for="f-bio">Short bio</label>
+                    <textarea id="f-bio" name="bio" rows="3" placeholder="Coaching style, achievements, who you love to work with… (optional)"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="submit-btn">Join the directory</button>
+            </form>
+        </section>
+
+        <!-- ============ DIRECTORY ============ -->
+        <section class="coach-section" id="directory">
+            <div class="section-head">
+                <h2>Coach directory</h2>
+                <p class="muted" id="results-count">Loading coaches…</p>
+            </div>
+
+            <div class="directory-toolbar">
+                <div class="search-input-wrapper">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    <input type="text" id="search-input" class="search-input" placeholder="Search name, city, certification…">
+                </div>
+
+                <div class="toolbar-row">
+                    <label class="inline-field">
+                        <span>Travels to</span>
+                        <select id="filter-travels-to">
+                            <option value="">Anywhere</option>
+                        </select>
+                    </label>
+                    <label class="inline-field">
+                        <span>Max rate</span>
+                        <input type="number" id="filter-rate" min="0" step="5" placeholder="$/hr">
+                    </label>
+                    <label class="inline-field">
+                        <span>Sort</span>
+                        <select id="filter-sort">
+                            <option value="newest">Newest</option>
+                            <option value="distance">Closest to area</option>
+                            <option value="rate">Lowest rate</option>
+                            <option value="experience">Most experience</option>
+                            <option value="travel">Travels furthest</option>
+                        </select>
+                    </label>
+                    <button class="btn btn-secondary" id="clear-filters" type="button">Clear</button>
+                </div>
+
+                <div class="filter-chips wrap" id="filter-skills"></div>
+            </div>
+
+            <div class="directory-layout">
+                <div class="coach-list" id="coach-list"></div>
+                <div class="coach-map-wrap">
+                    <div id="coach-map"></div>
+                    <div class="map-note">Circles show each coach's travel range.</div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="coach-footer">
+            <p>GTA PickleCourts · Coach Directory</p>
+        </footer>
+    </main>
+
+    <!-- Toast -->
+    <div class="toast hidden" id="toast"><span id="toast-msg"></span></div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Supabase config (fill in your keys) -->
+    <script src="supabase-config.js"></script>
+    <!-- App logic (module) -->
+    <script type="module" src="coaches.js"></script>
+</body>
+</html>
