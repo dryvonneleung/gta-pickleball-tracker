@@ -3041,6 +3041,22 @@ const COURTS_DATA = [
         amenities: ["washrooms", "parking", "dropin"],
         website: "https://kingsquaresportscentre.com/pickleball-markham/",
         notes: "Private indoor sports centre with 9 wood courts on the 2nd floor of King Square mall. Permanent lines, portable nets provided. Coordinates approximate — verify."
+    },
+    {
+        id: 9002,
+        name: "105 Gibson Centre",
+        city: "Markham",
+        address: "105 Gibson Dr, Markham, ON",
+        lat: 43.8175,
+        lng: -79.3490,
+        type: "indoor",
+        numCourts: 4,
+        surface: "Indoor gym",
+        access: "Private — Paid (~$15/hr)",
+        hours: "Mon–Fri 10 AM–10 PM, Sat 9 AM–10 PM, closed Sun — drop-in; see website",
+        amenities: ["washrooms", "parking", "dropin"],
+        website: "https://105gibson.com/drop-in-sports-age-14/",
+        notes: "Indoor community-centre gym used for pickleball drop-in (shared with badminton/volleyball/basketball). Court count varies with gym setup; coordinates approximate — verify."
     }
 
 ];
