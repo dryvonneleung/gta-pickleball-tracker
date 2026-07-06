@@ -139,9 +139,12 @@ they're discovered separately in two stages:
    **No local setup?** Run discovery from the Actions tab instead:
    **Actions → "Discover private courts" → Run workflow** (pick a source). It runs
    the script(s) and opens a **pull request** with the updated
-   `private-courts-candidates.json` for review. Requires the `GOOGLE_PLACES_API_KEY`
-   secret and the repo setting *Allow GitHub Actions to create and approve pull
-   requests* (Settings → Actions → General).
+   `private-courts-candidates.json` for review. It also runs **automatically on
+   the 1st of each month** (Google Places), opening a review PR you merge to
+   publish — so the live site stays current without unverified data going live
+   unreviewed. Requires the `GOOGLE_PLACES_API_KEY` secret and the repo setting
+   *Allow GitHub Actions to create and approve pull requests* (Settings → Actions
+   → General).
 
 2. **Review & enrich** — sanity-check each candidate's address/coordinates,
    optionally run `auto_update.py` against the venue's website to fill in court
