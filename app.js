@@ -117,7 +117,7 @@
                     <div class="popup-badge ${badgeClass}">${typeLabel}</div>
                     <div class="popup-name">${court.name}</div>
                     <div class="popup-address">${court.address}</div>
-                    <div class="popup-courts">${court.numCourts} court${court.numCourts > 1 ? 's' : ''} · ${court.surface}</div>
+                    <div class="popup-courts">${court.numCourts ? court.numCourts + ' court' + (court.numCourts > 1 ? 's' : '') : 'Courts: see site'} · ${court.surface}</div>
                     <a class="popup-link" onclick="window.__openCourtModal(${court.id})">
                         View Details →
                     </a>
@@ -193,7 +193,7 @@
 
         // Sort
         filtered.sort((a, b) => {
-            if (state.sortOrder === 'courts') return b.numCourts - a.numCourts;
+            if (state.sortOrder === 'courts') return (b.numCourts || 0) - (a.numCourts || 0);
             if (state.sortOrder === 'city') return a.city.localeCompare(b.city);
             return a.name.localeCompare(b.name);
         });
@@ -242,7 +242,7 @@
                     <div class="court-card-meta">
                         ${amenityIcons}
                     </div>
-                    <div class="court-card-courts">${court.numCourts} court${court.numCourts > 1 ? 's' : ''} · ${court.surface} · ${court.access}</div>
+                    <div class="court-card-courts">${court.numCourts ? court.numCourts + ' court' + (court.numCourts > 1 ? 's' : '') : 'Courts: see site'} · ${court.surface} · ${court.access}</div>
                 </div>
             `;
         }).join('');
@@ -339,7 +339,7 @@
         dom.modalInfoGrid.innerHTML = `
             <div class="info-card">
                 <div class="info-card-label">Courts</div>
-                <div class="info-card-value cyan">${court.numCourts}</div>
+                <div class="info-card-value cyan">${court.numCourts || '—'}</div>
             </div>
             <div class="info-card">
                 <div class="info-card-label">Surface</div>
@@ -386,7 +386,7 @@
         }
 
         dom.modalShare.onclick = () => {
-            const text = `Check out ${court.name} — ${court.numCourts} pickleball courts at ${court.address}!`;
+            const text = `Check out ${court.name} — ${court.numCourts ? court.numCourts + ' pickleball courts' : 'pickleball'} at ${court.address}!`;
             if (navigator.share) {
                 navigator.share({ title: court.name, text, url: window.location.href });
             } else {
