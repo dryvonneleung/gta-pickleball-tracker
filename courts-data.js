@@ -3106,6 +3106,22 @@ const COURTS_DATA = [
         amenities: ["washrooms", "parking", "dropin", "coaching", "pro_shop"],
         website: "https://onehealthclubs.com/facilities/page.php?id=3/",
         notes: "Full-service health club with 7 indoor courts, court cameras, coaching, pool and sauna. Coordinates approximate — verify."
+    },
+    {
+        id: 9007,
+        name: "Pickleplex Don Mills (Opening Soon)",
+        city: "Toronto",
+        address: "CF Shops at Don Mills, 1090 Don Mills Rd, Toronto, ON",
+        lat: 43.7285,
+        lng: -79.3445,
+        type: "outdoor",
+        numCourts: 8,
+        surface: "Outdoor hard court",
+        access: "Private — Booking / Membership",
+        hours: "Opening July 10, 2026 — see website",
+        amenities: ["parking", "dropin", "coaching", "pro_shop"],
+        website: "https://pickleplex.ca/locations/",
+        notes: "New Pickleplex outdoor pickleball & padel facility with a pro shop at CF Shops at Don Mills (Parkade 4). Opening July 10, 2026. Court count and coordinates approximate — verify once open."
     }
 
 ];
