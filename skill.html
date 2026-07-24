@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pickleball Skill Level Assessment | GTA PickleCourts</title>
+    <meta name="description" content="Free pickleball skill level assessment. Answer a short questionnaire to estimate your DUPR/USAPA-style rating (2.0–5.0+).">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css?v=13">
+    <link rel="stylesheet" href="skill.css?v=1">
+</head>
+<body class="page-skill">
+    <!-- Header -->
+    <header class="header" id="main-header">
+        <div class="header-inner">
+            <a class="logo-group" href="index.html" style="text-decoration:none;">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
+                                <stop offset="0%" stop-color="#ff8a00"/>
+                                <stop offset="100%" stop-color="#ff1d8e"/>
+                            </linearGradient>
+                            <mask id="ballHoles">
+                                <rect width="40" height="40" fill="white"/>
+                                <circle cx="12" cy="12" r="2.1" fill="black"/>
+                                <circle cx="20" cy="12" r="2.1" fill="black"/>
+                                <circle cx="28" cy="12" r="2.1" fill="black"/>
+                                <circle cx="12" cy="20" r="2.1" fill="black"/>
+                                <circle cx="20" cy="20" r="2.1" fill="black"/>
+                                <circle cx="28" cy="20" r="2.1" fill="black"/>
+                                <circle cx="12" cy="28" r="2.1" fill="black"/>
+                                <circle cx="20" cy="28" r="2.1" fill="black"/>
+                                <circle cx="28" cy="28" r="2.1" fill="black"/>
+                            </mask>
+                        </defs>
+                        <circle cx="20" cy="20" r="18" fill="url(#logoGrad)" mask="url(#ballHoles)"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>GTA Pickle<span class="accent">Courts</span></h1>
+                    <p class="tagline">Skill Assessment</p>
+                </div>
+            </a>
+            <div class="header-actions">
+                <a class="btn btn-secondary" href="index.html">← Court Finder</a>
+                <a class="btn btn-lime" href="coaches.html">🏓 Find a Coach</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="skill-page">
+        <section class="skill-hero">
+            <h1>Pickleball Skill Level Assessment</h1>
+            <p>Answer the questionnaire below to estimate your rating on the 2.0–5.0+ scale.
+               The technical section drives your band; tactics &amp; composure fine-tune it.</p>
+        </section>
+
+        <form id="assess-form" novalidate>
+            <!-- Player info -->
+            <section class="skill-section">
+                <div class="section-head"><h2>Player details</h2><p class="muted">Optional — used only on your printed result.</p></div>
+                <div class="info-grid">
+                    <div class="field"><label for="p-name">Player name</label><input id="p-name" type="text" placeholder="(optional)"></div>
+                    <div class="field"><label for="p-date">Date</label><input id="p-date" type="date"></div>
+                </div>
+            </section>
+
+            <!-- Section 1 -->
+            <section class="skill-section">
+                <div class="section-head"><h2>1 · Background &amp; experience</h2><p class="muted">Context for your result (not scored).</p></div>
+                <div id="section1"></div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="skill-section">
+                <div class="section-head">
+                    <h2>2 · Technical skills</h2>
+                    <p class="muted">Rate each 1 (can't do) to 5 (reliable under pressure). This section sets your rating band.</p>
+                </div>
+                <div id="skills"></div>
+                <p class="skill-progress-note" id="skill-progress">0 / 10 skills rated</p>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="skill-section">
+                <div class="section-head"><h2>3 · Tactical &amp; court awareness</h2></div>
+                <div id="section3"></div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="skill-section">
+                <div class="section-head"><h2>4 · Physical &amp; mental game</h2></div>
+                <div id="section4"></div>
+            </section>
+
+            <div class="calc-bar">
+                <button type="button" class="btn btn-primary" id="calc-btn">Calculate my level</button>
+                <button type="button" class="btn btn-secondary" id="reset-btn">Reset</button>
+                <button type="button" class="btn btn-secondary" id="print-btn">Print / Save</button>
+            </div>
+        </form>
+
+        <!-- Result -->
+        <section class="skill-section result hidden" id="result"></section>
+
+        <!-- Scoring reference -->
+        <section class="skill-section">
+            <div class="section-head"><h2>Scoring guide</h2><p class="muted">How the technical score maps to a rating band.</p></div>
+            <table class="score-table">
+                <thead><tr><th>Technical score (Section 2)</th><th>Suggested level</th></tr></thead>
+                <tbody>
+                    <tr><td>10–19</td><td><strong>2.0–2.5</strong> — Beginner</td></tr>
+                    <tr><td>20–29</td><td><strong>3.0</strong> — Novice / Low Intermediate</td></tr>
+                    <tr><td>30–37</td><td><strong>3.5</strong> — Intermediate</td></tr>
+                    <tr><td>38–44</td><td><strong>4.0</strong> — Advanced Intermediate</td></tr>
+                    <tr><td>45–50</td><td><strong>4.5–5.0+</strong> — Advanced / Competitive</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <footer class="skill-footer"><p>GTA PickleCourts · Skill Assessment · Estimate only — pair with live play for an official rating.</p></footer>
+    </main>
+
+    <script src="skill.js?v=1"></script>
+</body>
+</html>
