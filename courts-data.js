@@ -35,6 +35,7 @@ const COURTS_DATA = [
         access: "Membership / Booking",
         hours: "6 AM – 11 PM",
         amenities: ["washrooms", "parking", "lights", "coaching", "pro_shop", "dropin"],
+        website: "https://www.visitfairgrounds.com/",
         notes: "Premium indoor sports facility with top-quality hard courts. Online booking system. Leagues & tournaments available."
     },
     {
@@ -50,6 +51,7 @@ const COURTS_DATA = [
         access: "Membership / Booking",
         hours: "6 AM – 11 PM",
         amenities: ["washrooms", "parking", "lights", "coaching", "pro_shop", "dropin"],
+        website: "https://www.visitfairgrounds.com/",
         notes: "Large Etobicoke location with 10 indoor courts. High-quality surfaces, reservation system, pro coaching available."
     },
     {
@@ -624,33 +626,18 @@ const COURTS_DATA = [
     // ======== RICHMOND HILL — OUTDOOR ========
     {
         id: 39,
-        name: "Richmond Green Sports Centre",
+        name: "Richmond Green (Sports Centre & Park Courts)",
         city: "Richmond Hill",
         address: "1300 Elgin Mills Rd E, Richmond Hill, ON",
         lat: 43.9025,
         lng: -79.4224,
-        type: "indoor",
-        numCourts: 4,
-        surface: "Gymnasium",
+        type: "both",
+        numCourts: 12,
+        surface: "Indoor gym + outdoor asphalt",
         access: "Public / Drop-in",
-        hours: "6 AM – 10 PM",
+        hours: "Indoor 6 AM – 10 PM; outdoor 8 AM – dusk (seasonal)",
         amenities: ["washrooms", "parking", "lights", "dropin"],
-        notes: "Multi-sport complex with indoor gym pickleball courts and drop-in programming."
-    },
-    {
-        id: 4897,
-        name: "Richmond Green Park — Outdoor Pickleball Courts",
-        city: "Richmond Hill",
-        address: "1300 Elgin Mills Rd E, Richmond Hill, ON",
-        lat: 43.9038,
-        lng: -79.4248,
-        type: "outdoor",
-        numCourts: 8,
-        surface: "Asphalt",
-        access: "Public — Free",
-        hours: "8 AM – Dusk (Seasonal)",
-        amenities: ["washrooms", "parking"],
-        notes: "Seasonal outdoor pop-up courts on the north-west side of Richmond Green Park, near Parking Lot D and the Skateboard Park. Nets provided by the City — bring your own paddle and balls. Check richmondhill.ca for seasonal opening dates."
+        notes: "Indoor gym pickleball with drop-in programming, plus ~8 seasonal outdoor courts on the NW side of the park (near Lot D / skate park). Check richmondhill.ca for outdoor opening dates."
     },
     {
         id: 40,
@@ -3508,22 +3495,6 @@ const COURTS_DATA = [
         notes: "Discovered via Google Places (private/commercial venue). Court count, coordinates and details approximate — verify."
     },
     {
-        id: 9124,
-        name: "Fairgrounds Public Racket Club - Cloverdale",
-        city: "Etobicoke",
-        address: "250 The East Mall Unit 190, Etobicoke, ON M9B 3Y8",
-        lat: 43.632586,
-        lng: -79.556438,
-        type: "indoor",
-        numCourts: null,
-        surface: "Indoor court",
-        access: "Private — see website",
-        hours: "See website",
-        amenities: ["dropin"],
-        website: "http://www.visitfairgrounds.com/",
-        notes: "Discovered via Google Places (private/commercial venue). Court count, coordinates and details approximate — verify."
-    },
-    {
         id: 9125,
         name: "Ontario Racquet Club",
         city: "Mississauga",
@@ -3569,22 +3540,6 @@ const COURTS_DATA = [
         hours: "See website",
         amenities: ["dropin"],
         website: "https://dropspinpickleball.com/",
-        notes: "Discovered via Google Places (private/commercial venue). Court count, coordinates and details approximate — verify."
-    },
-    {
-        id: 9128,
-        name: "Fairgrounds Public Racket Club - Leaside",
-        city: "East York",
-        address: "849 Eglinton Ave E, East York, ON M4G 2L5",
-        lat: 43.713389,
-        lng: -79.361334,
-        type: "indoor",
-        numCourts: null,
-        surface: "Indoor court",
-        access: "Private — see website",
-        hours: "See website",
-        amenities: ["dropin"],
-        website: "https://www.visitfairgrounds.com/",
         notes: "Discovered via Google Places (private/commercial venue). Court count, coordinates and details approximate — verify."
     },
     {
@@ -3970,6 +3925,22 @@ const COURTS_DATA = [
         amenities: ["dropin"],
         website: "http://northdurhampickleballclub.ca/",
         notes: "Discovered via Google Places (private/commercial venue). Court count, coordinates and details approximate — verify."
+    },
+    {
+        id: 9200,
+        name: "WePlay Sports Centre",
+        city: "Markham",
+        address: "100 Clegg Rd, Markham, ON",
+        lat: 43.8512,
+        lng: -79.3352,
+        type: "indoor",
+        numCourts: 6,
+        surface: "Indoor court",
+        access: "Private — Drop-in / Booking",
+        hours: "See website for drop-in & booking times",
+        amenities: ["washrooms", "parking", "dropin", "coaching"],
+        website: "https://www.weplaycentre.ca/court-bookings",
+        notes: "Indoor sports centre in Downtown Markham with 6 pickleball courts (also volleyball/badminton). Drop-in, leagues, coaching and rentals. Coordinates approximate — verify."
     }
 
 ];
