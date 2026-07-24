@@ -74,6 +74,20 @@ body.page-skill {
     border-color: var(--clr-green); background: var(--clr-green-dim); color: var(--clr-text);
 }
 
+/* Section 2 — 1–5 scale guide */
+.scale-guide {
+    width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-bottom: 18px;
+    background: var(--clr-surface-2); border: 1px solid var(--clr-border); border-radius: var(--radius-md); overflow: hidden;
+}
+.scale-guide th { text-align: left; padding: 8px 12px; background: var(--clr-surface-3); color: var(--clr-text-secondary); font-weight: 600; font-size: 0.78rem; }
+.scale-guide td { padding: 8px 12px; border-top: 1px solid var(--clr-border); vertical-align: top; }
+.scale-guide td:first-child { width: 48px; text-align: center; }
+.scale-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: var(--radius-full);
+    background: var(--gradient-primary); color: #fff; font-weight: 700; font-family: var(--font-display); font-size: 0.85rem;
+}
+
 /* Section 2 — skill grid */
 .skill-grid { display: flex; flex-direction: column; gap: 8px; }
 .skill-head {

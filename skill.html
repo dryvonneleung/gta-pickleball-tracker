@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css?v=13">
-    <link rel="stylesheet" href="skill.css?v=1">
+    <link rel="stylesheet" href="skill.css?v=2">
 </head>
 <body class="page-skill">
     <!-- Header -->
@@ -80,8 +80,18 @@
             <section class="skill-section">
                 <div class="section-head">
                     <h2>2 · Technical skills</h2>
-                    <p class="muted">Rate each 1 (can't do) to 5 (reliable under pressure). This section sets your rating band.</p>
+                    <p class="muted">Rate each skill 1–5 based on how it holds up in real games (not your best-ever attempt). This section sets your rating band.</p>
                 </div>
+                <table class="scale-guide">
+                    <thead><tr><th>Rating</th><th>What it means</th></tr></thead>
+                    <tbody>
+                        <tr><td><span class="scale-num">1</span></td><td>Can't do it / brand new — can't reliably perform this shot</td></tr>
+                        <tr><td><span class="scale-num">2</span></td><td>Beginner — attempt it but rarely land it; inconsistent</td></tr>
+                        <tr><td><span class="scale-num">3</span></td><td>Developing — works in easy/practice situations, ~50/50 in a rally</td></tr>
+                        <tr><td><span class="scale-num">4</span></td><td>Consistent — reliable in normal play, occasional misses under pressure</td></tr>
+                        <tr><td><span class="scale-num">5</span></td><td>Reliable under pressure — holds up in fast, competitive points</td></tr>
+                    </tbody>
+                </table>
                 <div id="skills"></div>
                 <p class="skill-progress-note" id="skill-progress">0 / 10 skills rated</p>
             </section>
