@@ -4236,6 +4236,22 @@ const COURTS_DATA = [
         hours: "Apr–Oct, first‑come first‑served, half‑hour intervals",
         amenities: ["parking", "lights", "dropin"],
         notes: "Public outdoor pickleball courts at Des Newman WhitBEE Park, Town of Whitby, free Apr–Oct; lit for evening play."
+    },
+    {
+        id: 9220,
+        name: "UB Complex",
+        city: "Markham",
+        address: "1375 Denison St, Markham, ON L3R 5M1",
+        lat: 43.8328637,
+        lng: -79.3170180,
+        type: "indoor",
+        numCourts: 10,
+        surface: "Gerflor Taraflex",
+        access: "Membership / Booking",
+        hours: "9 AM – 11 PM daily",
+        amenities: ["washrooms", "lights", "coaching", "dropin"],
+        website: "https://www.ubcomplex.ca/",
+        notes: "Dedicated indoor badminton and pickleball club with 10 convertible-net courts. Pickleball all day, badminton in the evening. Book through CourtReserve; non-member guest fees payable at check-in. Indoor non-marking shoes required; cashless. Paddle rentals, lessons and change rooms on site."
     }
 
 ];
