@@ -24,8 +24,10 @@ import textwrap
 import subprocess
 from datetime import datetime
 from pathlib import Path
+import math
 import urllib.request
 import urllib.error
+import urllib.parse
 
 # -- Optional deps (graceful fallback) --
 try:
@@ -311,10 +313,103 @@ SYSTEM_PROMPT = textwrap.dedent("""
     Rules:
     - Return [] (empty array) if nothing has changed and no new courts are found.
     - Do NOT include courts that already exist in the database unchanged.
-    - Estimate lat/lng from the civic address using your knowledge of the GTA area.
+    - Give the most complete civic address you can find, including the street
+      type (St, Ave, Rd, Blvd) and the city. Accuracy of the address matters:
+      coordinates are resolved from it by a geocoder afterwards.
+    - Set lat and lng to null. Do NOT estimate them -- estimated coordinates
+      were kilometres out and put courts in the wrong place on the map.
     - Be conservative: only flag a court as changed if there is a clear factual difference.
     - Output ONLY valid JSON -- no markdown fences, no explanation text.
 """)
+
+
+# -- Geocoding ----------------------------------------------------------------
+#
+# Coordinates used to be estimated by the model, which an audit found to be
+# wrong by up to 10 km -- plausible-looking numbers in the right city, pinned
+# kilometres from the actual venue, so courts appeared to be missing. Addresses
+# are resolved through OpenStreetMap instead, and a court whose address cannot
+# be resolved keeps whatever coordinates it already had rather than guessing.
+
+NOMINATIM_URL   = "https://nominatim.openstreetmap.org/search"
+NOMINATIM_AGENT = "GTAPickleballTracker/1.0 (+https://dryvonneleung.github.io/gta-pickleball-tracker)"
+GEOCODE_MAX_KM  = 25.0     # a resolved point further than this from the city is wrong
+GTA_LAT = (43.0, 44.6)
+GTA_LNG = (-80.5, -78.3)
+
+
+def haversine_km(lat1, lng1, lat2, lng2) -> float:
+    r = 6371.0
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dp, dl = math.radians(lat2 - lat1), math.radians(lng2 - lng1)
+    a = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
+    return 2 * r * math.asin(math.sqrt(a))
+
+
+def geocode(query: str):
+    """Resolve an address to (lat, lng), or (None, None)."""
+    params = urllib.parse.urlencode(
+        {"q": query, "format": "json", "limit": 1, "countrycodes": "ca"})
+    req = urllib.request.Request(f"{NOMINATIM_URL}?{params}",
+                                 headers={"User-Agent": NOMINATIM_AGENT})
+    try:
+        hits = json.loads(urllib.request.urlopen(req, timeout=25).read())
+    except Exception as e:
+        log(f"    geocode failed ({type(e).__name__})", "WARN")
+        return None, None
+    if not hits:
+        return None, None
+    return float(hits[0]["lat"]), float(hits[0]["lon"])
+
+
+def resolve_coordinates(courts: list, city: str):
+    """Fill in lat/lng from each court's address. Nominatim asks for at most one
+    request a second, so this paces itself."""
+    # The GTA bounding box alone is too coarse -- it contains Hamilton, so a
+    # wrong-city match can pass it. Anchor on the city actually being scraped.
+    anchor_lat, anchor_lng = geocode(f"{city}, Ontario, Canada")
+    time.sleep(1.1)
+    if anchor_lat is None:
+        log(f"    could not locate {city}; falling back to GTA bounds only", "WARN")
+
+    for c in courts:
+        addr = str(c.get("address") or "").strip()
+        if not addr:
+            continue
+        query = addr if re.search(r",\s*(ON|Ontario)\b", addr, re.I) else f"{addr}, {city}, Ontario"
+        lat, lng = geocode(query)
+        time.sleep(1.1)
+
+        if lat is None:
+            # Fall back to the venue name, which OSM often knows directly.
+            lat, lng = geocode(f"{c.get('name','')}, {city}, Ontario")
+            time.sleep(1.1)
+
+        if lat is None:
+            if c.get("lat") is None or c.get("lng") is None:
+                log(f"    {c.get('name')}: address did not geocode, no coordinates", "WARN")
+            continue
+
+        if not (GTA_LAT[0] <= lat <= GTA_LAT[1] and GTA_LNG[0] <= lng <= GTA_LNG[1]):
+            log(f"    {c.get('name')}: geocoded outside the GTA, ignoring", "WARN")
+            continue
+
+        if anchor_lat is not None:
+            away = haversine_km(anchor_lat, anchor_lng, lat, lng)
+            if away > GEOCODE_MAX_KM:
+                log(f"    {c.get('name')}: geocoded {away:.0f} km from {city}, "
+                    f"ignoring (wrong match)", "WARN")
+                continue
+
+        old_lat, old_lng = c.get("lat"), c.get("lng")
+        c["lat"], c["lng"] = round(lat, 6), round(lng, 6)
+        if old_lat is not None and old_lng is not None:
+            try:
+                moved = haversine_km(float(old_lat), float(old_lng), lat, lng)
+                if moved > 0.5:
+                    log(f"    {c.get('name')}: pin corrected by {moved:.1f} km")
+            except (TypeError, ValueError):
+                pass
 
 
 def detect_changes(client, city: str, page_text: str, existing_block: str, next_id: int) -> list:
@@ -499,9 +594,24 @@ def main():
             continue
 
         log(f"  {len(updates)} change(s) detected:")
+        # Resolve coordinates from the address before anything is written. The
+        # model is explicitly told not to estimate them.
+        log(f"  Geocoding {len(updates)} address(es)...")
+        resolve_coordinates(updates, city)
         for u in updates:
             action = "UPDATE" if u.get("id") else "ADD"
             log(f"    [{action}] {u.get('name')} -- {u.get('address')}")
+
+        usable = []
+        for u in updates:
+            if u.get("lat") is None or u.get("lng") is None:
+                log(f"    Skipping {u.get('name')} -- no coordinates could be resolved.", "WARN")
+            else:
+                usable.append(u)
+        updates = usable
+        if not updates:
+            log("  Nothing left to apply after geocoding.")
+            continue
 
         if not args.dry_run:
             js, n, max_id = apply_changes(js, updates)
