@@ -49,7 +49,9 @@ LOG_FILE    = SCRIPT_DIR / "auto_update.log"
 # NVIDIA NIM endpoint -- override via environment variables
 NVIDIA_BASE_URL = os.getenv("NVIDIA_BASE_URL", "https://integrate.api.nvidia.com/v1")
 NVIDIA_API_KEY  = os.getenv("NVIDIA_API_KEY", "")   # Required
-NVIDIA_MODEL    = os.getenv("NVIDIA_MODEL", "meta/llama-3.3-70b-instruct")
+# meta/llama-3.3-70b-instruct reached end of life on 2026-08-26 and the
+# endpoint now answers 410 Gone, which fails every HTML source at once.
+NVIDIA_MODEL    = os.getenv("NVIDIA_MODEL", "nvidia/nemotron-3-super-120b-a12b")
 
 # Municipal pickleball pages to monitor
 SOURCES = [
@@ -65,13 +67,14 @@ SOURCES = [
     },
     {
         "city":    "Milton",
-        "url":     "https://www.milton.ca/en/arts-and-recreation/pickleball.aspx",
+        "url":     "https://www.milton.ca/explore-play/recreation-active-living/pickleball/",
         "enabled": True,
     },
     {
+        # Disabled 2026-10-10: Old page 404s; the replacement outdoor-facilities page has no pickleball content.
         "city":    "Ajax",
         "url":     "https://www.ajax.ca/en/play-and-discover/pickleball.aspx",
-        "enabled": True,
+        "enabled": False,
     },
     {
         "city":    "Burlington",
@@ -84,19 +87,24 @@ SOURCES = [
         "enabled": True,
     },
     {
+        # Disabled 2026-10-10: Old portal URL is gone; the new site has no standalone pickleball
+        # page -- programs live in the PerfectMind registration system.
         "city":    "Markham",
         "url":     "https://www.markham.ca/wps/portal/home/recreation/recreation-programs/sports/pickleball",
-        "enabled": True,
+        "enabled": False,
     },
     {
+        # Disabled 2026-10-10: No dedicated page any more; listings moved into a JavaScript facility
+        # finder that serves no static HTML.
         "city":    "Mississauga",
         "url":     "https://www.mississauga.ca/parks-and-recreation/sports/pickleball/",
-        "enabled": True,
+        "enabled": False,
     },
     {
+        # Disabled 2026-10-10: Pickleball page 404s; the Sports page lists no courts.
         "city":    "Brampton",
         "url":     "https://www.brampton.ca/EN/residents/Recreation/Pages/Pickleball.aspx",
-        "enabled": True,
+        "enabled": False,
     },
     {
         # Disabled: Toronto courts are sourced from the City of Toronto open-data
@@ -107,33 +115,35 @@ SOURCES = [
         "enabled": False,
     },
     {
+        # Disabled 2026-10-10: URL is correct but the site answers 403 to every non-browser client
+        # (bot protection), regardless of User-Agent. Needs a headless browser.
         "city":    "Vaughan",
-        "url":     "https://www.vaughan.ca/pickleball",
-        "enabled": True,
+        "url":     "https://www.vaughan.ca/about-city-vaughan/projects-and-initiatives/community-projects/pickleball",
+        "enabled": False,
     },
     {
         "city":    "Oakville",
-        "url":     "https://www.oakville.ca/parks-recreation-culture/parks-trails-gardens/tennis-and-pickleball-courts/",
+        "url":     "https://www.oakville.ca/parks-recreation-culture/programs-activities/pickleball/",
         "enabled": True,
     },
     {
         "city":    "Pickering",
-        "url":     "https://www.pickering.ca/en/discovering/pickleball.aspx",
+        "url":     "https://www.pickering.ca/parks-recreation-culture/recreation-programs/pickleball/",
         "enabled": True,
     },
     {
         "city":    "Whitby",
-        "url":     "https://www.whitby.ca/en/play/tennis-and-pickleball-courts.aspx",
+        "url":     "https://www.whitby.ca/explore-and-enjoy/parks-and-recreation/pickleball-and-tennis-courts/",
         "enabled": True,
     },
     {
         "city":    "Oshawa",
-        "url":     "https://www.oshawa.ca/en/parks-recreation-and-culture/racquet-sports.aspx",
+        "url":     "https://www.oshawa.ca/explore-play/recreation/facilities-and-rentals/court-rentals/",
         "enabled": True,
     },
     {
         "city":    "Caledon",
-        "url":     "https://www.caledon.ca/en/living-here/tennis-and-pickleball.aspx",
+        "url":     "https://www.caledon.ca/en/living-here/drop-in-activities.aspx",
         "enabled": True,
     },
     {
@@ -143,43 +153,48 @@ SOURCES = [
     },
     {
         "city":    "King",
-        "url":     "https://www.king.ca/recreation",
+        "url":     "https://www.king.ca/facilities",
         "enabled": True,
     },
     {
         "city":    "Whitchurch-Stouffville",
-        "url":     "https://www.townofws.ca/play/parks-and-open-spaces/",
+        "url":     "https://www.townofws.ca/play/parks-and-open-spaces/sport-courts/",
         "enabled": True,
     },
     {
+        # Disabled 2026-10-10: Old URL 404s; no replacement page with court content found.
         "city":    "East Gwillimbury",
         "url":     "https://www.eastgwillimbury.ca/en/parks-and-recreation/sports-fields-and-courts.aspx",
-        "enabled": True,
+        "enabled": False,
     },
     {
+        # Disabled 2026-10-10: Old URL 404s; no replacement page with court content found.
         "city":    "Georgina",
         "url":     "https://www.georgina.ca/en/recreation-and-culture/recreation-programs.aspx",
-        "enabled": True,
+        "enabled": False,
     },
     {
+        # Disabled 2026-10-10: Page loads but mentions pickleball once in passing; nothing to extract.
         "city":    "Brock",
         "url":     "https://townshipofbrock.ca/",
-        "enabled": True,
+        "enabled": False,
     },
     {
         "city":    "Uxbridge",
-        "url":     "https://www.uxbridge.ca/en/parks-and-recreation/parks-and-trails.aspx",
+        "url":     "https://www.uxbridge.ca/explore-and-play/facilities-parks-and-trails/parks-and-trails",
         "enabled": True,
     },
     {
+        # Disabled 2026-10-10: Old URL 404s; no replacement page with court content found.
         "city":    "Scugog",
         "url":     "https://www.scugog.ca/en/live-and-play/parks-and-trails.aspx",
-        "enabled": True,
+        "enabled": False,
     },
     {
+        # Disabled 2026-10-10: Old URL 404s; only news posts mention pickleball.
         "city":    "Clarington",
         "url":     "https://www.clarington.net/en/recreation-and-tourism/parks-and-sports-fields.aspx",
-        "enabled": True,
+        "enabled": False,
     },
 ]
 

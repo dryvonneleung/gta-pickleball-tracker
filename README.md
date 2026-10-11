@@ -90,7 +90,7 @@ tab) and commits any changes, which redeploys the site.
 |------|------|----------|---------|
 | Secret | `NVIDIA_API_KEY` | ✅ yes | — |
 | Variable | `NVIDIA_BASE_URL` | optional | `https://integrate.api.nvidia.com/v1` |
-| Variable | `NVIDIA_MODEL` | optional | `meta/llama-3.3-70b-instruct` |
+| Variable | `NVIDIA_MODEL` | optional | `nvidia/nemotron-3-super-120b-a12b` |
 
 To run it immediately, go to **Actions → Auto-update courts → Run workflow**
 (optionally enter a single city). Adjust the `cron:` line in the workflow to
