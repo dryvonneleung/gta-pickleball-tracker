@@ -4103,7 +4103,7 @@ const COURTS_DATA = [
         notes: "Multi-sport/commercial venue offering pickleball (from Google Places). Court count, coordinates and details approximate — verify."
     },
     {
-        id: null /* TODO: assign id */,
+        id: 9211,
         name: "Glen Abbey Community Centre",
         city: "Oakville",
         address: "1415 Third Line, Oakville, ON L6M 3G2",
@@ -4118,7 +4118,7 @@ const COURTS_DATA = [
         notes: "Indoor pickleball drop-in with three courts at Glen Abbey Community Centre."
     },
     {
-        id: null /* TODO: assign id */,
+        id: 9212,
         name: "Oakville Trafalgar Community Centre",
         city: "Oakville",
         address: "1440 Trafalgar Rd, Oakville, ON L6H 2L1",
@@ -4133,7 +4133,7 @@ const COURTS_DATA = [
         notes: "Indoor pickleball drop-in with four courts at Oakville Trafalgar Community Centre."
     },
     {
-        id: null /* TODO: assign id */,
+        id: 9213,
         name: "Queen Elizabeth Park Community and Cultural Centre",
         city: "Oakville",
         address: "2302 Bridge Rd, Oakville, ON L6L 2G6",
@@ -4148,7 +4148,7 @@ const COURTS_DATA = [
         notes: "Indoor pickleball drop-in with four courts (three in Double Gym, one in Single Gym) at Queen Elizabeth Park Community and Cultural Centre."
     },
     {
-        id: null /* TODO: assign id */,
+        id: 9214,
         name: "Sixteen Mile Community Centre",
         city: "Oakville",
         address: "3070 Sixteen Mile Drive, Oakville, ON L6M 0B4",
@@ -4163,7 +4163,7 @@ const COURTS_DATA = [
         notes: "Indoor pickleball drop-in with six courts at Sixteen Mile Community Centre."
     },
     {
-        id: null /* TODO: assign id */,
+        id: 9215,
         name: "Trafalgar Park Community Centre",
         city: "Oakville",
         address: "1440 Trafalgar Rd, Oakville, ON L6H 2L1",
@@ -4178,14 +4178,14 @@ const COURTS_DATA = [
         notes: "Indoor pickleball drop-in with three courts at Trafalgar Park Community Centre."
     },
     {
-        id: null /* TODO: assign id */,
+        id: 9216,
         name: "Diana, Princess of Wales Park",
         city: "Pickering",
         address: "1550 Kingston Rd, Pickering, ON",
         lat: 43.83,
         lng: -79.09,
         type: "outdoor",
-        numCourts: None,
+        numCourts: 1,
         surface: "Asphalt",
         access: "Public - Free",
         hours: "Open daily, dawn to dusk",
@@ -4193,7 +4193,7 @@ const COURTS_DATA = [
         notes: "Dedicated outdoor pickleball courts at Diana, Princess of Wales Park."
     },
     {
-        id: null /* TODO: assign id */,
+        id: 9217,
         name: "Central Park Pickleball Courts",
         city: "Whitby",
         address: "257 Michael Blvd., Whitby, ON",
@@ -4208,7 +4208,7 @@ const COURTS_DATA = [
         notes: "Public outdoor pickleball courts at Central Park, Town of Whitby, free Apr–Oct."
     },
     {
-        id: null /* TODO: assign id */,
+        id: 9218,
         name: "Cullen Central Park Pickleball Courts",
         city: "Whitby",
         address: "300 Taunton Rd. W., Whitby, ON",
@@ -4223,7 +4223,7 @@ const COURTS_DATA = [
         notes: "Public outdoor pickleball courts at Cullen Central Park, Town of Whitby, free Apr–Oct."
     },
     {
-        id: null /* TODO: assign id */,
+        id: 9219,
         name: "Des Newman WhitBEE Park Pickleball Courts",
         city: "Whitby",
         address: "105 Des Newman Blvd., Whitby, ON",

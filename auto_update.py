@@ -347,35 +347,56 @@ Identify any NEW courts or CHANGED details. Return the JSON array.
 
 
 def dict_to_js_entry(d: dict) -> str:
+    # `d.get(k, default)` returns None when the model supplied an explicit
+    # null, and an f-string then writes Python's `None` into the file, which
+    # is not valid JavaScript and takes the whole page down with a
+    # ReferenceError. Coerce every field through a null-aware helper instead.
+    def field(key, default):
+        v = d.get(key)
+        return default if v is None else v
+
     amenities = json.dumps(d.get("amenities") or [])
-    notes     = str(d.get("notes", "")).replace('"', '\\"')
+    notes     = str(d.get("notes") or "").replace('"', '\\"')
     cid       = d.get("id")
-    id_str    = str(cid) if cid else "null /* TODO: assign id */"
+    if not cid:
+        # Never emit a null id: app.js matches courts with `c.id === id` and
+        # keys markers by `court.id`, so a null court cannot be opened and all
+        # such courts collapse onto one marker key. apply_changes assigns ids.
+        raise ValueError(f"court {d.get('name')!r} reached rendering with no id")
+    id_str    = str(cid)
     return (
         "    {\n"
         f"        id: {id_str},\n"
-        f"        name: \"{d.get('name', '')}\",\n"
-        f"        city: \"{d.get('city', '')}\",\n"
-        f"        address: \"{d.get('address', '')}\",\n"
-        f"        lat: {d.get('lat', 0)},\n"
-        f"        lng: {d.get('lng', 0)},\n"
-        f"        type: \"{d.get('type', 'outdoor')}\",\n"
-        f"        numCourts: {d.get('numCourts', 1)},\n"
-        f"        surface: \"{d.get('surface', 'Asphalt')}\",\n"
-        f"        access: \"{d.get('access', 'Public - Free')}\",\n"
-        f"        hours: \"{d.get('hours', 'Dawn - Dusk')}\",\n"
+        f"        name: \"{field('name', '')}\",\n"
+        f"        city: \"{field('city', '')}\",\n"
+        f"        address: \"{field('address', '')}\",\n"
+        f"        lat: {field('lat', 0)},\n"
+        f"        lng: {field('lng', 0)},\n"
+        f"        type: \"{field('type', 'outdoor')}\",\n"
+        f"        numCourts: {field('numCourts', 1)},\n"
+        f"        surface: \"{field('surface', 'Asphalt')}\",\n"
+        f"        access: \"{field('access', 'Public - Free')}\",\n"
+        f"        hours: \"{field('hours', 'Dawn - Dusk')}\",\n"
         f"        amenities: {amenities},\n"
         f"        notes: \"{notes}\"\n"
         "    }"
     )
 
 
-def apply_changes(js: str, changes: list) -> tuple:
+def apply_changes(js: str, changes: list, next_id: int = None) -> tuple:
     if not changes:
-        return js, 0
+        return js, 0, next_id
+    if next_id is None:
+        next_id = get_max_id(js) + 1
     count = 0
     for court in changes:
         court_id  = court.get("id")
+        # Only an id the model recognised from the existing block counts as an
+        # update; everything else is new and gets its id here, not from the
+        # model, which used to answer null.
+        if not (court_id and re.search(rf"\bid:\s*{court_id}\b", js)):
+            court["id"] = next_id
+            next_id += 1
         js_entry  = dict_to_js_entry(court)
         if court_id and re.search(rf"\bid:\s*{court_id}\b", js):
             js = re.sub(
@@ -392,9 +413,9 @@ def apply_changes(js: str, changes: list) -> tuple:
                 js = js[:-2].rstrip().rstrip(",") + ",\n" + js_entry + "\n\n];"
             else:
                 js += "\n" + js_entry
-            log(f"  Added new: {court.get('name')} ({court.get('city')})")
+            log(f"  Added new id={court['id']}: {court.get('name')} ({court.get('city')})")
         count += 1
-    return js, count
+    return js, count, next_id
 
 
 # -- Git helpers --
@@ -483,7 +504,7 @@ def main():
             log(f"    [{action}] {u.get('name')} -- {u.get('address')}")
 
         if not args.dry_run:
-            js, n = apply_changes(js, updates)
+            js, n, max_id = apply_changes(js, updates)
             max_id = get_max_id(js)
             total += n
             changed.append(city)
