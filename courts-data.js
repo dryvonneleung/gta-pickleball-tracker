@@ -868,20 +868,20 @@ const COURTS_DATA = [
     },
 
     // ======== OAKVILLE ========
-    {
+        {
         id: 41,
-        name: "River Oaks Recreation Centre",
+        name: "River Oaks Community Centre",
         city: "Oakville",
         address: "2400 Sixth Line, Oakville, ON",
         lat: 43.4253,
         lng: -79.7283,
         type: "indoor",
-        numCourts: 4,
+        numCourts: 2,
         surface: "Gymnasium",
         access: "Public / Drop-in",
         hours: "Check Schedule",
-        amenities: ["washrooms", "parking", "dropin"],
-        notes: "Indoor pickleball drop-in at Oakville's recreation centre."
+        amenities: ["washrooms", "parking", "lights", "dropin"],
+        notes: "Indoor pickleball drop-in at River Oaks Community Centre; court count updated from 4 to 2."
     },
     {
         id: 42,
@@ -1050,20 +1050,20 @@ const COURTS_DATA = [
         amenities: [],
         notes: "One public court with tennis markings only (no pickleball lines). No lights, no washroom."
     },
-    {
+        {
         id: 44,
-        name: "Pickering Recreation Complex",
+        name: "Chestnut Hill Developments Recreation Complex",
         city: "Pickering",
         address: "1867 Valley Farm Rd, Pickering, ON",
-        lat: 43.8390,
-        lng: -79.0830,
+        lat: 43.839,
+        lng: -79.083,
         type: "both",
         numCourts: 5,
         surface: "Gymnasium / Asphalt",
         access: "Public / Drop-in",
-        hours: "Check Schedule",
+        hours: "Drop-in Play: Mon 9:00am-12:00pm Mixed Play ($4.36), 1:00pm-4:00pm Advanced Play, 6:30pm-9:00pm Mixed Play; Tue same; Thu 1:00pm-4:00pm Mixed Play ($4.36), 6:30pm-9:00pm Advanced Play; No drop-in July 1-Sept 7; Cancelled dates Oct 6, Oct 12, Oct 19-26, Nov 12, Dec 6; Last day Dec 17.",
         amenities: ["washrooms", "parking", "lights", "dropin"],
-        notes: "Multi-sport complex with both indoor and outdoor pickleball options."
+        notes: "Multi-sport complex with both indoor and outdoor pickleball options. Indoor drop-in pickleball offered at Chestnut Hill Developments Recreation Complex."
     },
 
     // ======== OSHAWA ========
@@ -1283,7 +1283,7 @@ const COURTS_DATA = [
         amenities: ["parking"],
         notes: "Two dedicated pickleball courts. Some hours reserved for programming Apr/May/Sep/Oct."
     },
-    {
+        {
         id: 4879,
         name: "Thomas Coates Park",
         city: "Aurora",
@@ -1296,7 +1296,7 @@ const COURTS_DATA = [
         access: "Public — Free",
         hours: "9 AM – Dusk",
         amenities: ["parking"],
-        notes: "Two dedicated pickleball courts. Court #1 available for permit rental. Recently resurfaced with new acrylic surface."
+        notes: "Two dedicated pickleball courts. Court #1 available for permit rental. Recently resurfaced with new acrylic surface. Part of the LineChecks pilot program for real-time court availability (2026)."
     },
     {
         id: 4880,
@@ -1360,20 +1360,20 @@ const COURTS_DATA = [
         amenities: ["washrooms", "parking", "dropin"],
         notes: "Indoor pickleball drop-in programs. Visit the Drop-in Sports schedule at milton.ca to pre-register."
     },
-    {
+        {
         id: 4883,
         name: "Bristol District Park",
         city: "Milton",
         address: "1045 Savoline Blvd, Milton, ON",
         lat: 43.5105,
-        lng: -79.8420,
+        lng: -79.842,
         type: "outdoor",
         numCourts: 2,
         surface: "Asphalt",
         access: "Public — Free",
         hours: "Dawn – Dusk",
         amenities: ["parking"],
-        notes: "Outdoor pickleball courts available for public use."
+        notes: "Outdoor pickleball courts available for public use. Facility rentals available June 1–Oct. 9, 2026 for courts 1 & 2: Tues/Thurs 5‑11 p.m., Wed 8 a.m.–5 p.m.; permit holders have priority."
     },
     {
         id: 4884,
@@ -1390,20 +1390,20 @@ const COURTS_DATA = [
         amenities: ["parking"],
         notes: "Multi-use outdoor courts with pickleball available."
     },
-    {
+        {
         id: 4885,
         name: "Coates Neighbourhood Park North",
         city: "Milton",
         address: "700 Millside Dr, Milton, ON",
         lat: 43.5072,
-        lng: -79.8780,
+        lng: -79.878,
         type: "outdoor",
         numCourts: 2,
         surface: "Asphalt",
         access: "Public — Free",
         hours: "Dawn – Dusk",
         amenities: ["parking"],
-        notes: "Outdoor pickleball courts available for public use."
+        notes: "Outdoor pickleball courts available for public use. Facility rentals available June 1–Oct. 9, 2026 for courts 1 & 2: Tues/Thurs 8 a.m.–5 p.m., Wed 5‑8 p.m.; permit holders have priority."
     },
     {
         id: 4886,
@@ -4101,6 +4101,141 @@ const COURTS_DATA = [
         amenities: ["dropin"],
         website: "https://www.stouffvilleathleticcenter.com/",
         notes: "Multi-sport/commercial venue offering pickleball (from Google Places). Court count, coordinates and details approximate — verify."
+    },
+    {
+        id: null /* TODO: assign id */,
+        name: "Glen Abbey Community Centre",
+        city: "Oakville",
+        address: "1415 Third Line, Oakville, ON L6M 3G2",
+        lat: 43.4405,
+        lng: -79.698,
+        type: "indoor",
+        numCourts: 3,
+        surface: "Gymnasium",
+        access: "Public / Drop-in",
+        hours: "Check Schedule",
+        amenities: ["washrooms", "parking", "lights", "dropin"],
+        notes: "Indoor pickleball drop-in with three courts at Glen Abbey Community Centre."
+    },
+    {
+        id: null /* TODO: assign id */,
+        name: "Oakville Trafalgar Community Centre",
+        city: "Oakville",
+        address: "1440 Trafalgar Rd, Oakville, ON L6H 2L1",
+        lat: 43.4605,
+        lng: -79.682,
+        type: "indoor",
+        numCourts: 4,
+        surface: "Gymnasium",
+        access: "Public / Drop-in",
+        hours: "Check Schedule",
+        amenities: ["washrooms", "parking", "lights", "dropin"],
+        notes: "Indoor pickleball drop-in with four courts at Oakville Trafalgar Community Centre."
+    },
+    {
+        id: null /* TODO: assign id */,
+        name: "Queen Elizabeth Park Community and Cultural Centre",
+        city: "Oakville",
+        address: "2302 Bridge Rd, Oakville, ON L6L 2G6",
+        lat: 43.4475,
+        lng: -79.698,
+        type: "indoor",
+        numCourts: 4,
+        surface: "Gymnasium",
+        access: "Public / Drop-in",
+        hours: "Check Schedule",
+        amenities: ["washrooms", "parking", "lights", "dropin"],
+        notes: "Indoor pickleball drop-in with four courts (three in Double Gym, one in Single Gym) at Queen Elizabeth Park Community and Cultural Centre."
+    },
+    {
+        id: null /* TODO: assign id */,
+        name: "Sixteen Mile Community Centre",
+        city: "Oakville",
+        address: "3070 Sixteen Mile Drive, Oakville, ON L6M 0B4",
+        lat: 43.438,
+        lng: -79.735,
+        type: "indoor",
+        numCourts: 6,
+        surface: "Gymnasium",
+        access: "Public / Drop-in",
+        hours: "Check Schedule",
+        amenities: ["washrooms", "parking", "lights", "dropin"],
+        notes: "Indoor pickleball drop-in with six courts at Sixteen Mile Community Centre."
+    },
+    {
+        id: null /* TODO: assign id */,
+        name: "Trafalgar Park Community Centre",
+        city: "Oakville",
+        address: "1440 Trafalgar Rd, Oakville, ON L6H 2L1",
+        lat: 43.4595,
+        lng: -79.682,
+        type: "indoor",
+        numCourts: 3,
+        surface: "Gymnasium",
+        access: "Public / Drop-in",
+        hours: "Check Schedule",
+        amenities: ["washrooms", "parking", "lights", "dropin"],
+        notes: "Indoor pickleball drop-in with three courts at Trafalgar Park Community Centre."
+    },
+    {
+        id: null /* TODO: assign id */,
+        name: "Diana, Princess of Wales Park",
+        city: "Pickering",
+        address: "1550 Kingston Rd, Pickering, ON",
+        lat: 43.83,
+        lng: -79.09,
+        type: "outdoor",
+        numCourts: None,
+        surface: "Asphalt",
+        access: "Public - Free",
+        hours: "Open daily, dawn to dusk",
+        amenities: ["parking", "washrooms"],
+        notes: "Dedicated outdoor pickleball courts at Diana, Princess of Wales Park."
+    },
+    {
+        id: null /* TODO: assign id */,
+        name: "Central Park Pickleball Courts",
+        city: "Whitby",
+        address: "257 Michael Blvd., Whitby, ON",
+        lat: 43.88,
+        lng: -78.938,
+        type: "outdoor",
+        numCourts: 2,
+        surface: "Asphalt",
+        access: "Public - Free",
+        hours: "Apr–Oct, first‑come first‑served, half‑hour intervals",
+        amenities: ["parking", "dropin"],
+        notes: "Public outdoor pickleball courts at Central Park, Town of Whitby, free Apr–Oct."
+    },
+    {
+        id: null /* TODO: assign id */,
+        name: "Cullen Central Park Pickleball Courts",
+        city: "Whitby",
+        address: "300 Taunton Rd. W., Whitby, ON",
+        lat: 43.8825,
+        lng: -78.945,
+        type: "outdoor",
+        numCourts: 3,
+        surface: "Asphalt",
+        access: "Public - Free",
+        hours: "Apr–Oct, first‑come first‑served, half‑hour intervals",
+        amenities: ["parking", "dropin"],
+        notes: "Public outdoor pickleball courts at Cullen Central Park, Town of Whitby, free Apr–Oct."
+    },
+    {
+        id: null /* TODO: assign id */,
+        name: "Des Newman WhitBEE Park Pickleball Courts",
+        city: "Whitby",
+        address: "105 Des Newman Blvd., Whitby, ON",
+        lat: 43.904,
+        lng: -78.945,
+        type: "outdoor",
+        numCourts: 4,
+        surface: "Asphalt",
+        access: "Public - Free",
+        hours: "Apr–Oct, first‑come first‑served, half‑hour intervals",
+        amenities: ["parking", "lights", "dropin"],
+        notes: "Public outdoor pickleball courts at Des Newman WhitBEE Park, Town of Whitby, free Apr–Oct; lit for evening play."
     }
 
 ];
