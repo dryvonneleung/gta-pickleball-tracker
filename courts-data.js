@@ -4192,7 +4192,7 @@ const COURTS_DATA = [
         amenities: ["parking", "washrooms"],
         notes: "Dedicated outdoor pickleball courts at Diana, Princess of Wales Park."
     },
-    {
+        {
         id: 9217,
         name: "Central Park Pickleball Courts",
         city: "Whitby",
@@ -4205,7 +4205,7 @@ const COURTS_DATA = [
         access: "Public - Free",
         hours: "Apr–Oct, first‑come first‑served, half‑hour intervals",
         amenities: ["parking", "dropin"],
-        notes: "Public outdoor pickleball courts at Central Park, Town of Whitby, free Apr–Oct."
+        notes: "Public outdoor pickleball courts at Central Park, Town of Whitby, free Apr–Oct; lined for both pickleball and tennis."
     },
     {
         id: 9218,
