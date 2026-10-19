@@ -4252,6 +4252,21 @@ const COURTS_DATA = [
         amenities: ["washrooms", "lights", "coaching", "dropin"],
         website: "https://www.ubcomplex.ca/",
         notes: "Dedicated indoor badminton and pickleball club with 10 convertible-net courts. Pickleball all day, badminton in the evening. Book through CourtReserve; non-member guest fees payable at check-in. Indoor non-marking shoes required; cashless. Paddle rentals, lessons and change rooms on site."
+    },
+    {
+        id: 9221,
+        name: "East Shore Community Centre",
+        city: "Pickering",
+        address: "1100 West Shore Blvd, Pickering, ON",
+        lat: 43.816315,
+        lng: -79.103548,
+        type: "indoor",
+        numCourts: 1,
+        surface: "Indoor court",
+        access: "Public - Free (registration required)",
+        hours: "See website",
+        amenities: [],
+        notes: "Indoor drop-in pickleball for 55+ at East Shore Community Centre; advanced registration required, no fees after registration."
     }
 
 ];
